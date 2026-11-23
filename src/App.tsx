@@ -106,11 +106,15 @@ export default function App() {
       if (!response.ok || !payload || !payload.item || !Array.isArray(payload.outfits)) {
         const isHtmlResponse = /^\s*</.test(rawText);
         const fallbackMessage =
-          response.status === 413
-            ? 'This photograph is too large to upload. Please try a smaller image.'
-            : isHtmlResponse
-              ? 'The styling API returned an unexpected page instead of JSON. Please refresh the preview and try again.'
-              : 'Could not analyze this garment photograph. Please try again.';
+          response.status === 404
+            ? 'The styling API route (/api/stylist/analyze) was not found. Make sure the API serverless functions are deployed.'
+            : response.status === 413
+              ? 'This photograph is too large to upload. Please try a smaller image.'
+              : response.status === 504
+                ? 'The styling analysis timed out. Please try again with a slightly smaller photo.'
+                : isHtmlResponse
+                  ? 'The styling API returned an unexpected page instead of JSON. Please check your deployment API routes and try again.'
+                  : 'Could not analyze this garment photograph. Please try again.';
         throw new Error(payload?.error || fallbackMessage);
       }
 
