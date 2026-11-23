@@ -1,0 +1,8 @@
+{
+  "name": "Atelier Edit — Virtual Stylist",
+  "description": "Upload a photo of a statement or hard-to-match clothing item to analyze its color palette and style, then visualize 3 distinct Casual, Business, and Night Out flat-lay outfits.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
